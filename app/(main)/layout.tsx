@@ -1,6 +1,8 @@
 import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
+import { Loader } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +19,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Main content area */}
       <div className="flex flex-col flex-1 overflow-y-auto">
         {/* Header */}
-        <Header />
+        <Suspense
+          fallback={
+            <Button size="icon" variant="outline">
+              <Loader className="animate-spin" />
+            </Button>
+          }>
+          <Header />
+        </Suspense>
 
         {/* Main content */}
         <main className="flex-1 overflow-auto p-4">{children}</main>
